@@ -50,8 +50,18 @@ class _countDetailsState extends State<countDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(widget.name.toString()),
+        iconTheme: IconThemeData(
+          // color: primaryOrangeColor,
+          color: Colors.black,
+        ),
+        elevation: 0,
+        backgroundColor: Colors.white,
+        title: Text(
+          widget.name.toString(),
+          style: TextStyle(color: Colors.black),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(25.0),

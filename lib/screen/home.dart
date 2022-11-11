@@ -128,7 +128,39 @@ class _Homep_pageState extends State<Homep_page> {
                         SizedBox(width: 10),
                         InkWell(
                           onTap: () {
-                            fetchCountry();
+                            print("object");
+                            print(countries![0].languages);
+                            showModalBottomSheet<void>(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return StatefulBuilder(builder:
+                                    (BuildContext context,
+                                        StateSetter
+                                            setState /*You can rename this!*/) {
+                                  return Container(
+                                    height: 200,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(25.0),
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text("language"),
+                                              Icon(
+                                                Icons.cancel,
+                                                color: Colors.grey,
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                });
+                              },
+                            );
                           },
                           child: Text(
                             "EN",
