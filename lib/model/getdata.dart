@@ -4,88 +4,92 @@
 
 import 'dart:convert';
 
-List<Countrylist> countrylistFromJson(String str) => List<Countrylist>.from(json.decode(str).map((x) => Countrylist.fromJson(x)));
+List<Countrylist> countrylistFromJson(String str) => List<Countrylist>.from(
+    json.decode(str).map((x) => Countrylist.fromJson(x)));
 
-String countrylistToJson(List<Countrylist> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String countrylistToJson(List<Countrylist> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class Countrylist {
-    Countrylist({
-        this.name,
-        this.tld,
-        this.cca2,
-        this.ccn3,
-        this.cca3,
-        this.cioc,
-        this.independent,
-        this.status,
-        this.unMember,
-        this.currencies,
-        this.idd,
-        this.capital,
-        this.altSpellings,
-        this.region,
-        this.subregion,
-        this.languages,
-        this.translations,
-        this.latlng,
-        this.landlocked,
-        this.area,
-        this.demonyms,
-        this.flag,
-        this.maps,
-        this.population,
-        this.fifa,
-        this.car,
-        this.timezones,
-        this.continents,
-        this.flags,
-        this.coatOfArms,
-        this.startOfWeek,
-        this.capitalInfo,
-        this.postalCode,
-        this.borders,
-        this.gini,
-    });
+  Countrylist({
+    this.name,
+    this.tld,
+    this.cca2,
+    this.ccn3,
+    this.cca3,
+    this.cioc,
+    this.independent,
+    this.status,
+    this.unMember,
+    this.currencies,
+    this.idd,
+    this.capital,
+    this.altSpellings,
+    this.region,
+    this.subregion,
+    this.languages,
+    this.translations,
+    this.latlng,
+    this.landlocked,
+    this.area,
+    this.demonyms,
+    this.flag,
+    this.maps,
+    this.population,
+    this.fifa,
+    this.car,
+    this.timezones,
+    this.continents,
+    this.flags,
+    this.coatOfArms,
+    this.startOfWeek,
+    this.capitalInfo,
+    this.postalCode,
+    this.borders,
+    this.gini,
+  });
 
-    Name? name;
-    List<String>? tld;
-    String? cca2;
-    String? ccn3;
-    String? cca3;
-    String? cioc;
-    bool? independent;
-    Status? status;
-    bool? unMember;
-    Currencies? currencies;
-    Idd? idd;
-    List<String>? capital;
-    List<String>? altSpellings;
-    Region? region;
-    String? subregion;
-    Map<String, String>? languages;
-    Map<String, Translation>? translations;
-    List<double>? latlng;
-    bool? landlocked;
-    double? area;
-    Demonyms? demonyms;
-    String? flag;
-    Maps? maps;
-    int? population;
-    String? fifa;
-    Car? car;
-    List<String>? timezones;
-    List<Continent>? continents;
-    CoatOfArms? flags;
-    CoatOfArms? coatOfArms;
-    StartOfWeek? startOfWeek;
-    CapitalInfo? capitalInfo;
-    PostalCode? postalCode;
-    List<String>? borders;
-    Map<String, double>? gini;
+  Name? name;
+  List<String>? tld;
+  String? cca2;
+  String? ccn3;
+  String? cca3;
+  String? cioc;
+  bool? independent;
+  Status? status;
+  bool? unMember;
+  Currencies? currencies;
+  Idd? idd;
+  List<String>? capital;
+  List<String>? altSpellings;
+  Region? region;
+  String? subregion;
+  Map<String, String>? languages;
+  Map<String, Translation>? translations;
+  List<double>? latlng;
+  bool? landlocked;
+  double? area;
+  Demonyms? demonyms;
+  String? flag;
+  Maps? maps;
+  int? population;
+  String? fifa;
+  Car? car;
+  List<String>? timezones;
+  List<Continent>? continents;
+  CoatOfArms? flags;
+  CoatOfArms? coatOfArms;
+  StartOfWeek? startOfWeek;
+  CapitalInfo? capitalInfo;
+  PostalCode? postalCode;
+  List<String>? borders;
+  Map<String, double>? gini;
 
-    factory Countrylist.fromJson(Map<String, dynamic> json) => Countrylist(
+  factory Countrylist.fromJson(Map<String, dynamic> json) => Countrylist(
         name: Name.fromJson(json["name"]),
-        tld: json["tld"] == null ? null : List<String>.from(json["tld"].map((x) => x)),
+        tld: json["tld"] == null
+            ? null
+            : List<String>.from(json["tld"].map((x) => x)),
         cca2: json["cca2"],
         ccn3: json["ccn3"] == null ? null : json["ccn3"],
         cca3: json["cca3"],
@@ -93,35 +97,53 @@ class Countrylist {
         independent: json["independent"] == null ? null : json["independent"],
         status: statusValues.map[json["status"]],
         unMember: json["unMember"],
-        currencies: json["currencies"] == null ? null : Currencies.fromJson(json["currencies"]),
+        currencies: json["currencies"] == null
+            ? null
+            : Currencies.fromJson(json["currencies"]),
         idd: Idd.fromJson(json["idd"]),
-        capital: json["capital"] == null ? null : List<String>.from(json["capital"].map((x) => x)),
+        capital: json["capital"] == null
+            ? []
+            : List<String>.from(json["capital"].map((x) => x)),
         altSpellings: List<String>.from(json["altSpellings"].map((x) => x)),
         region: regionValues.map[json["region"]],
         subregion: json["subregion"] == null ? null : json["subregion"],
-        languages: json["languages"] == null ? null : Map.from(json["languages"]).map((k, v) => MapEntry<String, String>(k, v)),
-        translations: Map.from(json["translations"]).map((k, v) => MapEntry<String, Translation>(k, Translation.fromJson(v))),
+        languages: json["languages"] == null
+            ? null
+            : Map.from(json["languages"])
+                .map((k, v) => MapEntry<String, String>(k, v)),
+        translations: Map.from(json["translations"]).map((k, v) =>
+            MapEntry<String, Translation>(k, Translation.fromJson(v))),
         latlng: List<double>.from(json["latlng"].map((x) => x.toDouble())),
         landlocked: json["landlocked"],
         area: json["area"].toDouble(),
-        demonyms: json["demonyms"] == null ? null : Demonyms.fromJson(json["demonyms"]),
+        demonyms: json["demonyms"] == null
+            ? null
+            : Demonyms.fromJson(json["demonyms"]),
         flag: json["flag"],
         maps: Maps.fromJson(json["maps"]),
         population: json["population"],
         fifa: json["fifa"] == null ? null : json["fifa"],
         car: Car.fromJson(json["car"]),
         timezones: List<String>.from(json["timezones"].map((x) => x)),
-        continents: List<Continent>.from(json["continents"].map((x) => continentValues.map[x])),
+        continents: List<Continent>.from(
+            json["continents"].map((x) => continentValues.map[x])),
         flags: CoatOfArms.fromJson(json["flags"]),
         coatOfArms: CoatOfArms.fromJson(json["coatOfArms"]),
         startOfWeek: startOfWeekValues.map[json["startOfWeek"]],
         capitalInfo: CapitalInfo.fromJson(json["capitalInfo"]),
-        postalCode: json["postalCode"] == null ? null : PostalCode.fromJson(json["postalCode"]),
-        borders: json["borders"] == null ? null : List<String>.from(json["borders"].map((x) => x)),
-        gini: json["gini"] == null ? null : Map.from(json["gini"]).map((k, v) => MapEntry<String, double>(k, v.toDouble())),
-    );
+        postalCode: json["postalCode"] == null
+            ? null
+            : PostalCode.fromJson(json["postalCode"]),
+        borders: json["borders"] == null
+            ? null
+            : List<String>.from(json["borders"].map((x) => x)),
+        gini: json["gini"] == null
+            ? null
+            : Map.from(json["gini"])
+                .map((k, v) => MapEntry<String, double>(k, v.toDouble())),
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "name": name!.toJson(),
         "tld": tld == null ? null : List<dynamic>.from(tld!.map((x) => x)),
         "cca2": cca2,
@@ -133,12 +155,17 @@ class Countrylist {
         "unMember": unMember,
         "currencies": currencies == null ? null : currencies!.toJson(),
         "idd": idd!.toJson(),
-        "capital": capital == null ? null : List<dynamic>.from(capital!.map((x) => x)),
+        "capital":
+            capital == null ? null : List<dynamic>.from(capital!.map((x) => x)),
         "altSpellings": List<dynamic>.from(altSpellings!.map((x) => x)),
         "region": regionValues.reverse[region],
         "subregion": subregion == null ? null : subregion,
-        "languages": languages == null ? null : Map.from(languages!).map((k, v) => MapEntry<String, dynamic>(k, v)),
-        "translations": Map.from(translations!).map((k, v) => MapEntry<String, dynamic>(k, v.toJson())),
+        "languages": languages == null
+            ? null
+            : Map.from(languages!)
+                .map((k, v) => MapEntry<String, dynamic>(k, v)),
+        "translations": Map.from(translations!)
+            .map((k, v) => MapEntry<String, dynamic>(k, v.toJson())),
         "latlng": List<dynamic>.from(latlng!.map((x) => x)),
         "landlocked": landlocked,
         "area": area,
@@ -149,424 +176,439 @@ class Countrylist {
         "fifa": fifa == null ? null : fifa,
         "car": car!.toJson(),
         "timezones": List<dynamic>.from(timezones!.map((x) => x)),
-        "continents": List<dynamic>.from(continents!.map((x) => continentValues.reverse[x])),
+        "continents": List<dynamic>.from(
+            continents!.map((x) => continentValues.reverse[x])),
         "flags": flags!.toJson(),
         "coatOfArms": coatOfArms!.toJson(),
         "startOfWeek": startOfWeekValues.reverse[startOfWeek],
         "capitalInfo": capitalInfo!.toJson(),
         "postalCode": postalCode == null ? null : postalCode!.toJson(),
-        "borders": borders == null ? null : List<dynamic>.from(borders!.map((x) => x)),
-        "gini": gini == null ? null : Map.from(gini!).map((k, v) => MapEntry<String, dynamic>(k, v)),
-    };
+        "borders":
+            borders == null ? null : List<dynamic>.from(borders!.map((x) => x)),
+        "gini": gini == null
+            ? null
+            : Map.from(gini!).map((k, v) => MapEntry<String, dynamic>(k, v)),
+      };
 }
 
 class CapitalInfo {
-    CapitalInfo({
-        this.latlng,
-    });
+  CapitalInfo({
+    this.latlng,
+  });
 
-    List<double>? latlng;
+  List<double>? latlng;
 
-    factory CapitalInfo.fromJson(Map<String, dynamic> json) => CapitalInfo(
-        latlng: json["latlng"] == null ? null : List<double>.from(json["latlng"].map((x) => x.toDouble())),
-    );
+  factory CapitalInfo.fromJson(Map<String, dynamic> json) => CapitalInfo(
+        latlng: json["latlng"] == null
+            ? null
+            : List<double>.from(json["latlng"].map((x) => x.toDouble())),
+      );
 
-    Map<String, dynamic> toJson() => {
-        "latlng": latlng == null ? null : List<dynamic>.from(latlng!.map((x) => x)),
-    };
+  Map<String, dynamic> toJson() => {
+        "latlng":
+            latlng == null ? null : List<dynamic>.from(latlng!.map((x) => x)),
+      };
 }
 
 class Car {
-    Car({
-        this.signs,
-        this.side,
-    });
+  Car({
+    this.signs,
+    this.side,
+  });
 
-    List<String>? signs;
-    Side? side;
+  List<String>? signs;
+  Side? side;
 
-    factory Car.fromJson(Map<String, dynamic> json) => Car(
-        signs: json["signs"] == null ? null : List<String>.from(json["signs"].map((x) => x)),
+  factory Car.fromJson(Map<String, dynamic> json) => Car(
+        signs: json["signs"] == null
+            ? null
+            : List<String>.from(json["signs"].map((x) => x)),
         side: sideValues.map[json["side"]],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
-        "signs": signs == null ? null : List<dynamic>.from(signs!.map((x) => x)),
+  Map<String, dynamic> toJson() => {
+        "signs":
+            signs == null ? null : List<dynamic>.from(signs!.map((x) => x)),
         "side": sideValues.reverse[side],
-    };
+      };
 }
 
 enum Side { LEFT, RIGHT }
 
-final sideValues = EnumValues({
-    "left": Side.LEFT,
-    "right": Side.RIGHT
-});
+final sideValues = EnumValues({"left": Side.LEFT, "right": Side.RIGHT});
 
 class CoatOfArms {
-    CoatOfArms({
-        this.png,
-        this.svg,
-    });
+  CoatOfArms({
+    this.png,
+    this.svg,
+  });
 
-    String? png;
-    String? svg;
+  String? png;
+  String? svg;
 
-    factory CoatOfArms.fromJson(Map<String, dynamic> json) => CoatOfArms(
+  factory CoatOfArms.fromJson(Map<String, dynamic> json) => CoatOfArms(
         png: json["png"] == null ? null : json["png"],
         svg: json["svg"] == null ? null : json["svg"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "png": png == null ? null : png,
         "svg": svg == null ? null : svg,
-    };
+      };
 }
 
-enum Continent { NORTH_AMERICA, ASIA, AFRICA, SOUTH_AMERICA, EUROPE, OCEANIA, ANTARCTICA }
+enum Continent {
+  NORTH_AMERICA,
+  ASIA,
+  AFRICA,
+  SOUTH_AMERICA,
+  EUROPE,
+  OCEANIA,
+  ANTARCTICA
+}
 
 final continentValues = EnumValues({
-    "Africa": Continent.AFRICA,
-    "Antarctica": Continent.ANTARCTICA,
-    "Asia": Continent.ASIA,
-    "Europe": Continent.EUROPE,
-    "North America": Continent.NORTH_AMERICA,
-    "Oceania": Continent.OCEANIA,
-    "South America": Continent.SOUTH_AMERICA
+  "Africa": Continent.AFRICA,
+  "Antarctica": Continent.ANTARCTICA,
+  "Asia": Continent.ASIA,
+  "Europe": Continent.EUROPE,
+  "North America": Continent.NORTH_AMERICA,
+  "Oceania": Continent.OCEANIA,
+  "South America": Continent.SOUTH_AMERICA
 });
 
 class Currencies {
-    Currencies({
-        this.bbd,
-        this.usd,
-        this.xaf,
-        this.brl,
-        this.eur,
-        this.aud,
-        this.kid,
-        this.ron,
-        this.lak,
-        this.xof,
-        this.iqd,
-        this.kes,
-        this.kyd,
-        this.gnf,
-        this.tnd,
-        this.bob,
-        this.cny,
-        this.krw,
-        this.kwd,
-        this.dzd,
-        this.awg,
-        this.rub,
-        this.dkk,
-        this.gbp,
-        this.twd,
-        this.cad,
-        this.fjd,
-        this.xpf,
-        this.pen,
-        this.clp,
-        this.egp,
-        this.mkd,
-        this.bdt,
-        this.sgd,
-        this.etb,
-        this.bsd,
-        this.tmt,
-        this.ang,
-        this.zmw,
-        this.hnl,
-        this.mad,
-        this.npr,
-        this.xcd,
-        this.omr,
-        this.hkd,
-        this.pyg,
-        this.mdl,
-        this.kgs,
-        this.mur,
-        this.btn,
-        this.inr,
-        this.yer,
-        this.imp,
-        this.dop,
-        this.ggp,
-        this.lrd,
-        this.zwl,
-        this.ugx,
-        this.vuv,
-        this.ils,
-        this.jod,
-        this.pkr,
-        this.bnd,
-        this.aed,
-        this.gel,
-        this.scr,
-        this.fkp,
-        this.gip,
-        this.sbd,
-        this.uzs,
-        this.mnt,
-        this.gyd,
-        this.bam,
-        this.top,
-        this.rwf,
-        this.bgn,
-        this.ngn,
-        this.shp,
-        this.fok,
-        this.lsl,
-        this.zar,
-        this.cve,
-        this.kpw,
-        this.cuc,
-        this.cup,
-        this.srd,
-        this.nzd,
-        this.mxn,
-        this.php,
-        this.sek,
-        this.jmd,
-        this.ves,
-        this.jep,
-        this.afn,
-        this.mop,
-        this.syp,
-        this.stn,
-        this.chf,
-        this.szl,
-        this.myr,
-        this.pln,
-        this.ssp,
-        this.khr,
-        this.lkr,
-        this.ghs,
-        this.ern,
-        this.bzd,
-        this.ttd,
-        this.ckd,
-        this.mzn,
-        this.irr,
-        this.cdf,
-        this.mvr,
-        this.mru,
-        this.czk,
-        this.byn,
-        this.all,
-        this.mwk,
-        this.sos,
-        this.rsd,
-        this.isk,
-        this.wst,
-        this.mmk,
-        this.thb,
-        this.lbp,
-        this.kzt,
-        this.tvd,
-        this.huf,
-        this.nok,
-        this.kmf,
-        this.sdg,
-        this.amd,
-        this.uyu,
-        this.sar,
-        this.bif,
-        this.uah,
-        this.sll,
-        this.bmd,
-        this.nad,
-        this.htg,
-        this.lyd,
-        this.pgk,
-        this.aoa,
-        this.idr,
-        this.ars,
-        this.pab,
-        this.jpy,
-        this.nio,
-        this.tzs,
-        this.tjs,
-        this.gtq,
-        this.bhd,
-        this.mga,
-        this.djf,
-        this.gmd,
-        this.bwp,
-        this.currenciesTry,
-        this.azn,
-        this.crc,
-        this.vnd,
-        this.hrk,
-        this.qar,
-        this.cop,
-    });
+  Currencies({
+    this.bbd,
+    this.usd,
+    this.xaf,
+    this.brl,
+    this.eur,
+    this.aud,
+    this.kid,
+    this.ron,
+    this.lak,
+    this.xof,
+    this.iqd,
+    this.kes,
+    this.kyd,
+    this.gnf,
+    this.tnd,
+    this.bob,
+    this.cny,
+    this.krw,
+    this.kwd,
+    this.dzd,
+    this.awg,
+    this.rub,
+    this.dkk,
+    this.gbp,
+    this.twd,
+    this.cad,
+    this.fjd,
+    this.xpf,
+    this.pen,
+    this.clp,
+    this.egp,
+    this.mkd,
+    this.bdt,
+    this.sgd,
+    this.etb,
+    this.bsd,
+    this.tmt,
+    this.ang,
+    this.zmw,
+    this.hnl,
+    this.mad,
+    this.npr,
+    this.xcd,
+    this.omr,
+    this.hkd,
+    this.pyg,
+    this.mdl,
+    this.kgs,
+    this.mur,
+    this.btn,
+    this.inr,
+    this.yer,
+    this.imp,
+    this.dop,
+    this.ggp,
+    this.lrd,
+    this.zwl,
+    this.ugx,
+    this.vuv,
+    this.ils,
+    this.jod,
+    this.pkr,
+    this.bnd,
+    this.aed,
+    this.gel,
+    this.scr,
+    this.fkp,
+    this.gip,
+    this.sbd,
+    this.uzs,
+    this.mnt,
+    this.gyd,
+    this.bam,
+    this.top,
+    this.rwf,
+    this.bgn,
+    this.ngn,
+    this.shp,
+    this.fok,
+    this.lsl,
+    this.zar,
+    this.cve,
+    this.kpw,
+    this.cuc,
+    this.cup,
+    this.srd,
+    this.nzd,
+    this.mxn,
+    this.php,
+    this.sek,
+    this.jmd,
+    this.ves,
+    this.jep,
+    this.afn,
+    this.mop,
+    this.syp,
+    this.stn,
+    this.chf,
+    this.szl,
+    this.myr,
+    this.pln,
+    this.ssp,
+    this.khr,
+    this.lkr,
+    this.ghs,
+    this.ern,
+    this.bzd,
+    this.ttd,
+    this.ckd,
+    this.mzn,
+    this.irr,
+    this.cdf,
+    this.mvr,
+    this.mru,
+    this.czk,
+    this.byn,
+    this.all,
+    this.mwk,
+    this.sos,
+    this.rsd,
+    this.isk,
+    this.wst,
+    this.mmk,
+    this.thb,
+    this.lbp,
+    this.kzt,
+    this.tvd,
+    this.huf,
+    this.nok,
+    this.kmf,
+    this.sdg,
+    this.amd,
+    this.uyu,
+    this.sar,
+    this.bif,
+    this.uah,
+    this.sll,
+    this.bmd,
+    this.nad,
+    this.htg,
+    this.lyd,
+    this.pgk,
+    this.aoa,
+    this.idr,
+    this.ars,
+    this.pab,
+    this.jpy,
+    this.nio,
+    this.tzs,
+    this.tjs,
+    this.gtq,
+    this.bhd,
+    this.mga,
+    this.djf,
+    this.gmd,
+    this.bwp,
+    this.currenciesTry,
+    this.azn,
+    this.crc,
+    this.vnd,
+    this.hrk,
+    this.qar,
+    this.cop,
+  });
 
-    Aed? bbd;
-    Aed? usd;
-    Aed? xaf;
-    Aed? brl;
-    Aed? eur;
-    Aed? aud;
-    Aed? kid;
-    Aed? ron;
-    Aed? lak;
-    Aed? xof;
-    Aed? iqd;
-    Aed? kes;
-    Aed? kyd;
-    Aed? gnf;
-    Aed? tnd;
-    Aed? bob;
-    Aed? cny;
-    Aed? krw;
-    Aed? kwd;
-    Aed? dzd;
-    Aed? awg;
-    Aed? rub;
-    Aed? dkk;
-    Aed? gbp;
-    Aed? twd;
-    Aed? cad;
-    Aed? fjd;
-    Aed? xpf;
-    Aed? pen;
-    Aed? clp;
-    Aed? egp;
-    Aed? mkd;
-    Aed? bdt;
-    Aed? sgd;
-    Aed? etb;
-    Aed? bsd;
-    Aed? tmt;
-    Aed? ang;
-    Aed? zmw;
-    Aed? hnl;
-    Aed? mad;
-    Aed? npr;
-    Aed? xcd;
-    Aed? omr;
-    Aed? hkd;
-    Aed? pyg;
-    Aed? mdl;
-    Aed? kgs;
-    Aed? mur;
-    Aed? btn;
-    Aed? inr;
-    Aed? yer;
-    Aed? imp;
-    Aed? dop;
-    Aed? ggp;
-    Aed? lrd;
-    Aed? zwl;
-    Aed? ugx;
-    Aed? vuv;
-    Aed? ils;
-    Aed? jod;
-    Aed? pkr;
-    Aed? bnd;
-    Aed? aed;
-    Aed? gel;
-    Aed? scr;
-    Aed? fkp;
-    Aed? gip;
-    Aed? sbd;
-    Aed? uzs;
-    Aed? mnt;
-    Aed? gyd;
-    Bam? bam;
-    Aed? top;
-    Aed? rwf;
-    Aed? bgn;
-    Aed? ngn;
-    Aed? shp;
-    Aed? fok;
-    Aed? lsl;
-    Aed? zar;
-    Aed? cve;
-    Aed? kpw;
-    Aed? cuc;
-    Aed? cup;
-    Aed? srd;
-    Aed? nzd;
-    Aed? mxn;
-    Aed? php;
-    Aed? sek;
-    Aed? jmd;
-    Aed? ves;
-    Aed? jep;
-    Aed? afn;
-    Aed? mop;
-    Aed? syp;
-    Aed? stn;
-    Aed? chf;
-    Aed? szl;
-    Aed? myr;
-    Aed? pln;
-    Aed? ssp;
-    Aed? khr;
-    Aed? lkr;
-    Aed? ghs;
-    Aed? ern;
-    Aed? bzd;
-    Aed? ttd;
-    Aed? ckd;
-    Aed? mzn;
-    Aed? irr;
-    Aed? cdf;
-    Aed? mvr;
-    Aed? mru;
-    Aed? czk;
-    Aed? byn;
-    Aed? all;
-    Aed? mwk;
-    Aed? sos;
-    Aed? rsd;
-    Aed? isk;
-    Aed? wst;
-    Aed? mmk;
-    Aed? thb;
-    Aed? lbp;
-    Aed? kzt;
-    Aed? tvd;
-    Aed? huf;
-    Aed? nok;
-    Aed? kmf;
-    Bam? sdg;
-    Aed? amd;
-    Aed? uyu;
-    Aed? sar;
-    Aed? bif;
-    Aed? uah;
-    Aed? sll;
-    Aed? bmd;
-    Aed? nad;
-    Aed? htg;
-    Aed? lyd;
-    Aed? pgk;
-    Aed? aoa;
-    Aed? idr;
-    Aed? ars;
-    Aed? pab;
-    Aed? jpy;
-    Aed? nio;
-    Aed? tzs;
-    Aed? tjs;
-    Aed? gtq;
-    Aed? bhd;
-    Aed? mga;
-    Aed? djf;
-    Aed? gmd;
-    Aed? bwp;
-    Aed? currenciesTry;
-    Aed? azn;
-    Aed? crc;
-    Aed? vnd;
-    Aed? hrk;
-    Aed? qar;
-    Aed? cop;
+  Aed? bbd;
+  Aed? usd;
+  Aed? xaf;
+  Aed? brl;
+  Aed? eur;
+  Aed? aud;
+  Aed? kid;
+  Aed? ron;
+  Aed? lak;
+  Aed? xof;
+  Aed? iqd;
+  Aed? kes;
+  Aed? kyd;
+  Aed? gnf;
+  Aed? tnd;
+  Aed? bob;
+  Aed? cny;
+  Aed? krw;
+  Aed? kwd;
+  Aed? dzd;
+  Aed? awg;
+  Aed? rub;
+  Aed? dkk;
+  Aed? gbp;
+  Aed? twd;
+  Aed? cad;
+  Aed? fjd;
+  Aed? xpf;
+  Aed? pen;
+  Aed? clp;
+  Aed? egp;
+  Aed? mkd;
+  Aed? bdt;
+  Aed? sgd;
+  Aed? etb;
+  Aed? bsd;
+  Aed? tmt;
+  Aed? ang;
+  Aed? zmw;
+  Aed? hnl;
+  Aed? mad;
+  Aed? npr;
+  Aed? xcd;
+  Aed? omr;
+  Aed? hkd;
+  Aed? pyg;
+  Aed? mdl;
+  Aed? kgs;
+  Aed? mur;
+  Aed? btn;
+  Aed? inr;
+  Aed? yer;
+  Aed? imp;
+  Aed? dop;
+  Aed? ggp;
+  Aed? lrd;
+  Aed? zwl;
+  Aed? ugx;
+  Aed? vuv;
+  Aed? ils;
+  Aed? jod;
+  Aed? pkr;
+  Aed? bnd;
+  Aed? aed;
+  Aed? gel;
+  Aed? scr;
+  Aed? fkp;
+  Aed? gip;
+  Aed? sbd;
+  Aed? uzs;
+  Aed? mnt;
+  Aed? gyd;
+  Bam? bam;
+  Aed? top;
+  Aed? rwf;
+  Aed? bgn;
+  Aed? ngn;
+  Aed? shp;
+  Aed? fok;
+  Aed? lsl;
+  Aed? zar;
+  Aed? cve;
+  Aed? kpw;
+  Aed? cuc;
+  Aed? cup;
+  Aed? srd;
+  Aed? nzd;
+  Aed? mxn;
+  Aed? php;
+  Aed? sek;
+  Aed? jmd;
+  Aed? ves;
+  Aed? jep;
+  Aed? afn;
+  Aed? mop;
+  Aed? syp;
+  Aed? stn;
+  Aed? chf;
+  Aed? szl;
+  Aed? myr;
+  Aed? pln;
+  Aed? ssp;
+  Aed? khr;
+  Aed? lkr;
+  Aed? ghs;
+  Aed? ern;
+  Aed? bzd;
+  Aed? ttd;
+  Aed? ckd;
+  Aed? mzn;
+  Aed? irr;
+  Aed? cdf;
+  Aed? mvr;
+  Aed? mru;
+  Aed? czk;
+  Aed? byn;
+  Aed? all;
+  Aed? mwk;
+  Aed? sos;
+  Aed? rsd;
+  Aed? isk;
+  Aed? wst;
+  Aed? mmk;
+  Aed? thb;
+  Aed? lbp;
+  Aed? kzt;
+  Aed? tvd;
+  Aed? huf;
+  Aed? nok;
+  Aed? kmf;
+  Bam? sdg;
+  Aed? amd;
+  Aed? uyu;
+  Aed? sar;
+  Aed? bif;
+  Aed? uah;
+  Aed? sll;
+  Aed? bmd;
+  Aed? nad;
+  Aed? htg;
+  Aed? lyd;
+  Aed? pgk;
+  Aed? aoa;
+  Aed? idr;
+  Aed? ars;
+  Aed? pab;
+  Aed? jpy;
+  Aed? nio;
+  Aed? tzs;
+  Aed? tjs;
+  Aed? gtq;
+  Aed? bhd;
+  Aed? mga;
+  Aed? djf;
+  Aed? gmd;
+  Aed? bwp;
+  Aed? currenciesTry;
+  Aed? azn;
+  Aed? crc;
+  Aed? vnd;
+  Aed? hrk;
+  Aed? qar;
+  Aed? cop;
 
-    factory Currencies.fromJson(Map<String, dynamic> json) => Currencies(
+  factory Currencies.fromJson(Map<String, dynamic> json) => Currencies(
         bbd: json["BBD"] == null ? null : Aed.fromJson(json["BBD"]),
         usd: json["USD"] == null ? null : Aed.fromJson(json["USD"]),
         xaf: json["XAF"] == null ? null : Aed.fromJson(json["XAF"]),
@@ -730,9 +772,9 @@ class Currencies {
         hrk: json["HRK"] == null ? null : Aed.fromJson(json["HRK"]),
         qar: json["QAR"] == null ? null : Aed.fromJson(json["QAR"]),
         cop: json["COP"] == null ? null : Aed.fromJson(json["COP"]),
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "BBD": bbd == null ? null : bbd!.toJson(),
         "USD": usd == null ? null : usd!.toJson(),
         "XAF": xaf == null ? null : xaf!.toJson(),
@@ -896,223 +938,233 @@ class Currencies {
         "HRK": hrk == null ? null : hrk!.toJson(),
         "QAR": qar == null ? null : qar!.toJson(),
         "COP": cop == null ? null : cop!.toJson(),
-    };
+      };
 }
 
 class Aed {
-    Aed({
-        this.name,
-        this.symbol,
-    });
+  Aed({
+    this.name,
+    this.symbol,
+  });
 
-    String? name;
-    String? symbol;
+  String? name;
+  String? symbol;
 
-    factory Aed.fromJson(Map<String, dynamic> json) => Aed(
+  factory Aed.fromJson(Map<String, dynamic> json) => Aed(
         name: json["name"],
         symbol: json["symbol"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "name": name,
         "symbol": symbol,
-    };
+      };
 }
 
 class Bam {
-    Bam({
-        this.name,
-    });
+  Bam({
+    this.name,
+  });
 
-    String? name;
+  String? name;
 
-    factory Bam.fromJson(Map<String, dynamic> json) => Bam(
+  factory Bam.fromJson(Map<String, dynamic> json) => Bam(
         name: json["name"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "name": name,
-    };
+      };
 }
 
 class Demonyms {
-    Demonyms({
-        this.eng,
-        this.fra,
-    });
+  Demonyms({
+    this.eng,
+    this.fra,
+  });
 
-    Eng? eng;
-    Eng? fra;
+  Eng? eng;
+  Eng? fra;
 
-    factory Demonyms.fromJson(Map<String, dynamic> json) => Demonyms(
+  factory Demonyms.fromJson(Map<String, dynamic> json) => Demonyms(
         eng: Eng.fromJson(json["eng"]),
         fra: json["fra"] == null ? null : Eng.fromJson(json["fra"]),
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "eng": eng!.toJson(),
         "fra": fra == null ? null : fra!.toJson(),
-    };
+      };
 }
 
 class Eng {
-    Eng({
-        this.f,
-        this.m,
-    });
+  Eng({
+    this.f,
+    this.m,
+  });
 
-    String? f;
-    String? m;
+  String? f;
+  String? m;
 
-    factory Eng.fromJson(Map<String, dynamic> json) => Eng(
+  factory Eng.fromJson(Map<String, dynamic> json) => Eng(
         f: json["f"],
         m: json["m"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "f": f,
         "m": m,
-    };
+      };
 }
 
 class Idd {
-    Idd({
-        this.root,
-        this.suffixes,
-    });
+  Idd({
+    this.root,
+    this.suffixes,
+  });
 
-    String? root;
-    List<String>? suffixes;
+  String? root;
+  List<String>? suffixes;
 
-    factory Idd.fromJson(Map<String, dynamic> json) => Idd(
+  factory Idd.fromJson(Map<String, dynamic> json) => Idd(
         root: json["root"] ?? "",
-        suffixes: json["suffixes"] == null ? [] : List<String>.from(json["suffixes"].map((x) => x)),
-    );
+        suffixes: json["suffixes"] == null
+            ? []
+            : List<String>.from(json["suffixes"].map((x) => x)),
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "root": root,
-        "suffixes": suffixes == null ? null : List<dynamic>.from(suffixes!.map((x) => x)),
-    };
+        "suffixes": suffixes == null
+            ? null
+            : List<dynamic>.from(suffixes!.map((x) => x)),
+      };
 }
 
 class Maps {
-    Maps({
-        this.googleMaps,
-        this.openStreetMaps,
-    });
+  Maps({
+    this.googleMaps,
+    this.openStreetMaps,
+  });
 
-    String? googleMaps;
-    String? openStreetMaps;
+  String? googleMaps;
+  String? openStreetMaps;
 
-    factory Maps.fromJson(Map<String, dynamic> json) => Maps(
+  factory Maps.fromJson(Map<String, dynamic> json) => Maps(
         googleMaps: json["googleMaps"],
         openStreetMaps: json["openStreetMaps"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "googleMaps": googleMaps,
         "openStreetMaps": openStreetMaps,
-    };
+      };
 }
 
 class Name {
-    Name({
-        this.common,
-        this.official,
-        this.nativeName,
-    });
+  Name({
+    this.common,
+    this.official,
+    this.nativeName,
+  });
 
-    String? common;
-    String? official;
-    Map<String, Translation>? nativeName;
+  String? common;
+  String? official;
+  Map<String, Translation>? nativeName;
 
-    factory Name.fromJson(Map<String, dynamic> json) => Name(
+  factory Name.fromJson(Map<String, dynamic> json) => Name(
         common: json["common"],
         official: json["official"],
-        nativeName: json["nativeName"] == null ? null : Map.from(json["nativeName"]).map((k, v) => MapEntry<String, Translation>(k, Translation.fromJson(v))),
-    );
+        nativeName: json["nativeName"] == null
+            ? null
+            : Map.from(json["nativeName"]).map((k, v) =>
+                MapEntry<String, Translation>(k, Translation.fromJson(v))),
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "common": common,
         "official": official,
-        "nativeName": nativeName == null ? null : Map.from(nativeName!).map((k, v) => MapEntry<String, dynamic>(k, v.toJson())),
-    };
+        "nativeName": nativeName == null
+            ? null
+            : Map.from(nativeName!)
+                .map((k, v) => MapEntry<String, dynamic>(k, v.toJson())),
+      };
 }
 
 class Translation {
-    Translation({
-        this.official,
-        this.common,
-    });
+  Translation({
+    this.official,
+    this.common,
+  });
 
-    String? official;
-    String? common;
+  String? official;
+  String? common;
 
-    factory Translation.fromJson(Map<String, dynamic> json) => Translation(
+  factory Translation.fromJson(Map<String, dynamic> json) => Translation(
         official: json["official"],
         common: json["common"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "official": official,
         "common": common,
-    };
+      };
 }
 
 class PostalCode {
-    PostalCode({
-        this.format,
-        this.regex,
-    });
+  PostalCode({
+    this.format,
+    this.regex,
+  });
 
-    String? format;
-    String? regex;
+  String? format;
+  String? regex;
 
-    factory PostalCode.fromJson(Map<String, dynamic> json) => PostalCode(
+  factory PostalCode.fromJson(Map<String, dynamic> json) => PostalCode(
         format: json["format"],
         regex: json["regex"] == null ? null : json["regex"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "format": format,
         "regex": regex == null ? null : regex,
-    };
+      };
 }
 
 enum Region { AMERICAS, AFRICA, EUROPE, OCEANIA, ASIA, ANTARCTIC }
 
 final regionValues = EnumValues({
-    "Africa": Region.AFRICA,
-    "Americas": Region.AMERICAS,
-    "Antarctic": Region.ANTARCTIC,
-    "Asia": Region.ASIA,
-    "Europe": Region.EUROPE,
-    "Oceania": Region.OCEANIA
+  "Africa": Region.AFRICA,
+  "Americas": Region.AMERICAS,
+  "Antarctic": Region.ANTARCTIC,
+  "Asia": Region.ASIA,
+  "Europe": Region.EUROPE,
+  "Oceania": Region.OCEANIA
 });
 
 enum StartOfWeek { MONDAY, SUNDAY, SATURDAY }
 
 final startOfWeekValues = EnumValues({
-    "monday": StartOfWeek.MONDAY,
-    "saturday": StartOfWeek.SATURDAY,
-    "sunday": StartOfWeek.SUNDAY
+  "monday": StartOfWeek.MONDAY,
+  "saturday": StartOfWeek.SATURDAY,
+  "sunday": StartOfWeek.SUNDAY
 });
 
 enum Status { OFFICIALLY_ASSIGNED, USER_ASSIGNED }
 
 final statusValues = EnumValues({
-    "officially-assigned": Status.OFFICIALLY_ASSIGNED,
-    "user-assigned": Status.USER_ASSIGNED
+  "officially-assigned": Status.OFFICIALLY_ASSIGNED,
+  "user-assigned": Status.USER_ASSIGNED
 });
 
 class EnumValues<T> {
-    Map<String, T> map;
-    Map<T, String>? reverseMap;
+  Map<String, T> map;
+  Map<T, String>? reverseMap;
 
-     EnumValues(this.map);
+  EnumValues(this.map);
 
-    Map<T, String> get reverse {
-        reverseMap ??= map.map((k, v) => MapEntry(v, k));
-        return reverseMap!;
-    }
+  Map<T, String> get reverse {
+    reverseMap ??= map.map((k, v) => MapEntry(v, k));
+    return reverseMap!;
+  }
 }
