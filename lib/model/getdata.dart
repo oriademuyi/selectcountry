@@ -88,13 +88,13 @@ class Countrylist {
   factory Countrylist.fromJson(Map<String, dynamic> json) => Countrylist(
         name: Name.fromJson(json["name"]),
         tld: json["tld"] == null
-            ? null
+            ? []
             : List<String>.from(json["tld"].map((x) => x)),
         cca2: json["cca2"],
-        ccn3: json["ccn3"] == null ? null : json["ccn3"],
-        cca3: json["cca3"],
-        cioc: json["cioc"] == null ? null : json["cioc"],
-        independent: json["independent"] == null ? null : json["independent"],
+        ccn3: json["ccn3"] == null ? '' : json["ccn3"],
+        cca3: json["cca3"] == null ? '' : json["cca3"],
+        cioc: json["cioc"] == null ? '' : json["cioc"],
+        independent: json["independent"],
         status: statusValues.map[json["status"]],
         unMember: json["unMember"],
         currencies: json["currencies"] == null
@@ -106,7 +106,7 @@ class Countrylist {
             : List<String>.from(json["capital"].map((x) => x)),
         altSpellings: List<String>.from(json["altSpellings"].map((x) => x)),
         region: regionValues.map[json["region"]],
-        subregion: json["subregion"] == null ? null : json["subregion"],
+        subregion: json["subregion"] == null ? '' : json["subregion"],
         languages: json["languages"] == null
             ? null
             : Map.from(json["languages"])
@@ -122,7 +122,7 @@ class Countrylist {
         flag: json["flag"],
         maps: Maps.fromJson(json["maps"]),
         population: json["population"],
-        fifa: json["fifa"] == null ? null : json["fifa"],
+        fifa: json["fifa"] == null ? '' : json["fifa"],
         car: Car.fromJson(json["car"]),
         timezones: List<String>.from(json["timezones"].map((x) => x)),
         continents: List<Continent>.from(
@@ -135,7 +135,7 @@ class Countrylist {
             ? null
             : PostalCode.fromJson(json["postalCode"]),
         borders: json["borders"] == null
-            ? null
+            ? []
             : List<String>.from(json["borders"].map((x) => x)),
         gini: json["gini"] == null
             ? null
@@ -145,23 +145,23 @@ class Countrylist {
 
   Map<String, dynamic> toJson() => {
         "name": name!.toJson(),
-        "tld": tld == null ? null : List<dynamic>.from(tld!.map((x) => x)),
+        "tld": tld == null ? '' : List<dynamic>.from(tld!.map((x) => x)),
         "cca2": cca2,
-        "ccn3": ccn3 == null ? null : ccn3,
+        "ccn3": ccn3 == null ? '' : ccn3,
         "cca3": cca3,
-        "cioc": cioc == null ? null : cioc,
-        "independent": independent == null ? null : independent,
+        "cioc": cioc == null ? '' : cioc,
+        "independent": independent == null ? '' : independent,
         "status": statusValues.reverse[status],
         "unMember": unMember,
-        "currencies": currencies == null ? null : currencies!.toJson(),
+        "currencies": currencies == null ? '' : currencies!.toJson(),
         "idd": idd!.toJson(),
         "capital":
             capital == null ? null : List<dynamic>.from(capital!.map((x) => x)),
         "altSpellings": List<dynamic>.from(altSpellings!.map((x) => x)),
         "region": regionValues.reverse[region],
-        "subregion": subregion == null ? null : subregion,
+        "subregion": subregion == null ? '' : subregion,
         "languages": languages == null
-            ? null
+            ? ''
             : Map.from(languages!)
                 .map((k, v) => MapEntry<String, dynamic>(k, v)),
         "translations": Map.from(translations!)
@@ -169,11 +169,11 @@ class Countrylist {
         "latlng": List<dynamic>.from(latlng!.map((x) => x)),
         "landlocked": landlocked,
         "area": area,
-        "demonyms": demonyms == null ? null : demonyms!.toJson(),
+        "demonyms": demonyms == null ? '' : demonyms!.toJson(),
         "flag": flag,
         "maps": maps!.toJson(),
         "population": population,
-        "fifa": fifa == null ? null : fifa,
+        "fifa": fifa == null ? '' : fifa,
         "car": car!.toJson(),
         "timezones": List<dynamic>.from(timezones!.map((x) => x)),
         "continents": List<dynamic>.from(
@@ -182,11 +182,11 @@ class Countrylist {
         "coatOfArms": coatOfArms!.toJson(),
         "startOfWeek": startOfWeekValues.reverse[startOfWeek],
         "capitalInfo": capitalInfo!.toJson(),
-        "postalCode": postalCode == null ? null : postalCode!.toJson(),
+        "postalCode": postalCode == null ? '' : postalCode!.toJson(),
         "borders":
-            borders == null ? null : List<dynamic>.from(borders!.map((x) => x)),
+            borders == null ? '' : List<dynamic>.from(borders!.map((x) => x)),
         "gini": gini == null
-            ? null
+            ? ''
             : Map.from(gini!).map((k, v) => MapEntry<String, dynamic>(k, v)),
       };
 }
@@ -200,13 +200,13 @@ class CapitalInfo {
 
   factory CapitalInfo.fromJson(Map<String, dynamic> json) => CapitalInfo(
         latlng: json["latlng"] == null
-            ? null
+            ? []
             : List<double>.from(json["latlng"].map((x) => x.toDouble())),
       );
 
   Map<String, dynamic> toJson() => {
         "latlng":
-            latlng == null ? null : List<dynamic>.from(latlng!.map((x) => x)),
+            latlng == null ? '' : List<dynamic>.from(latlng!.map((x) => x)),
       };
 }
 
@@ -221,14 +221,13 @@ class Car {
 
   factory Car.fromJson(Map<String, dynamic> json) => Car(
         signs: json["signs"] == null
-            ? null
+            ? []
             : List<String>.from(json["signs"].map((x) => x)),
         side: sideValues.map[json["side"]],
       );
 
   Map<String, dynamic> toJson() => {
-        "signs":
-            signs == null ? null : List<dynamic>.from(signs!.map((x) => x)),
+        "signs": signs == null ? '' : List<dynamic>.from(signs!.map((x) => x)),
         "side": sideValues.reverse[side],
       };
 }
@@ -247,13 +246,13 @@ class CoatOfArms {
   String? svg;
 
   factory CoatOfArms.fromJson(Map<String, dynamic> json) => CoatOfArms(
-        png: json["png"] == null ? null : json["png"],
-        svg: json["svg"] == null ? null : json["svg"],
+        png: json["png"] == null ? '' : json["png"],
+        svg: json["svg"] == null ? '' : json["svg"],
       );
 
   Map<String, dynamic> toJson() => {
-        "png": png == null ? null : png,
-        "svg": svg == null ? null : svg,
+        "png": png == null ? '' : png,
+        "svg": svg == null ? '' : svg,
       };
 }
 
@@ -993,7 +992,7 @@ class Demonyms {
 
   Map<String, dynamic> toJson() => {
         "eng": eng!.toJson(),
-        "fra": fra == null ? null : fra!.toJson(),
+        "fra": fra == null ? '' : fra!.toJson(),
       };
 }
 
@@ -1035,9 +1034,8 @@ class Idd {
 
   Map<String, dynamic> toJson() => {
         "root": root,
-        "suffixes": suffixes == null
-            ? null
-            : List<dynamic>.from(suffixes!.map((x) => x)),
+        "suffixes":
+            suffixes == null ? '' : List<dynamic>.from(suffixes!.map((x) => x)),
       };
 }
 
@@ -1085,7 +1083,7 @@ class Name {
         "common": common,
         "official": official,
         "nativeName": nativeName == null
-            ? null
+            ? ''
             : Map.from(nativeName!)
                 .map((k, v) => MapEntry<String, dynamic>(k, v.toJson())),
       };
@@ -1122,12 +1120,12 @@ class PostalCode {
 
   factory PostalCode.fromJson(Map<String, dynamic> json) => PostalCode(
         format: json["format"],
-        regex: json["regex"] == null ? null : json["regex"],
+        regex: json["regex"] == null ? '' : json["regex"],
       );
 
   Map<String, dynamic> toJson() => {
         "format": format,
-        "regex": regex == null ? null : regex,
+        "regex": regex == null ? '' : regex,
       };
 }
 

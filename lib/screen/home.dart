@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_function_literals_in_foreach_calls
+
 import 'dart:convert';
 
 import 'package:countrylist/model/getdata.dart';
@@ -25,21 +27,29 @@ class _Homep_pageState extends State<Homep_page> {
   bool checkbocliked5 = false;
   bool checkbocliked6 = false;
   bool checkbocliked7 = false;
-  List<Countrylist>? countries;
+  List<Countrylist>? countries = [];
+  List<String>? languages;
 
   fetchCountry() async {
     final response =
         await http.get(Uri.parse('https://restcountries.com/v3.1/all'));
-
     if (response.statusCode == 200) {
       print(response.body);
+
       var county_name = countrylistFromJson(response.body);
+      // for (var i = 0; i < countrylistFromJson(response.body).length; i++){
+      //   languages.add(countrylistFromJson(response.body)[i].languages)
+      // }
       setState(() {
         countries = county_name;
         countries!
             .sort((a, b) => a.name!.official!.compareTo(b.name!.official!));
+        // languages = countries!.forEach((element) {
+        //   languages!.add(element.languages!.values.toString());
+        // })
       });
-      // return county_name;
+      print("my country list are ${countries![0].languages}");
+      return county_name;
       // return Countrylist.fromJson(jsonDecode(response.body));
     } else {
       throw Exception('Failed to load country');
@@ -49,6 +59,7 @@ class _Homep_pageState extends State<Homep_page> {
   @override
   void initState() {
     fetchCountry();
+    // countrieslist = fetchCountry();
     super.initState();
   }
 
@@ -143,17 +154,46 @@ class _Homep_pageState extends State<Homep_page> {
                                       padding: const EdgeInsets.all(25.0),
                                       child: Column(
                                         children: [
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text("language"),
-                                              Icon(
-                                                Icons.cancel,
-                                                color: Colors.grey,
-                                              ),
-                                            ],
-                                          ),
+                                          Text("Loading data"),
+                                          SizedBox(height: 10),
+                                          CircularProgressIndicator()
+                                          // FutureBuilder<Countrylist>(
+                                          //     future: countrieslist,
+                                          //     builder: (
+                                          //       BuildContext context,
+                                          //       AsyncSnapshot<Countrylist>
+                                          //           snapshot,
+                                          //     ) {
+                                          //       if (snapshot.hasData) {
+                                          //         print(snapshot.data);
+                                          //         return ListView.builder(
+                                          //             itemCount: snapshot.data!
+                                          //                 .languages!.length,
+                                          //             itemBuilder:
+                                          //                 (BuildContext context,
+                                          //                     int index) {
+                                          //               return Column(
+                                          //                 children: [
+                                          //                   Text("data"),
+                                          //                 ],
+                                          //               );
+                                          //             });
+                                          //       } else {
+                                          //         print(snapshot.data);
+                                          //         return Text('Loading data');
+                                          //       }
+                                          //     })
+                                          // Row(
+                                          //   mainAxisAlignment:
+                                          //       MainAxisAlignment.spaceBetween,
+                                          //   children: [
+                                          //     Text("language"),
+                                          //     Icon(
+                                          //       Icons.cancel,
+                                          //       color: Colors.grey,
+                                          //     ),
+                                          //   ],
+                                          // ),
                                         ],
                                       ),
                                     ),
@@ -225,7 +265,7 @@ class _Homep_pageState extends State<Homep_page> {
                                               )
                                             ],
                                           ),
-                                          SizedBox(height: 15),
+                                          SizedBox(height: 10),
                                           Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
@@ -729,73 +769,99 @@ class _Homep_pageState extends State<Homep_page> {
               ],
             ),
             Expanded(
-              child: ListView.builder(itemBuilder: (context, index) {
-                return ListTile(
-                  title: InkWell(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => countDetails(
-                                name: countries![index].name!.official!,
-                                population:
-                                    countries![index].population.toString(),
-                                region: countries![index].region.toString(),
-                                capital: countries![index].capital.toString(),
-                                motto: countries![index].demonyms.toString(),
-                                officaillabuage:
-                                    countries![index].languages.toString(),
-                                ethicgroup: countries![index].subregion,
-                                relgion: countries![index].region.toString(),
-                                government: countries![index].status.toString(),
-                                independece:
-                                    countries![index].independent.toString(),
-                                area: countries![index].area.toString(),
-                                currency:
-                                    countries![index].currencies.toString(),
-                                GDP: countries![index].gini.toString(),
-                                timezone:
-                                    countries![index].timezones.toString(),
-                                dateformat: countries![index].cca2.toString(),
-                                dailingcode: countries![index].cca3,
-                                drivingside: countries![index].ccn3,
-                                data: countries![index].flags!.png!),
-                          ));
-                      print(countries![index].name!.official!);
-                      print(countries![index].population);
-                      print(countries![index].region);
-                      print(countries![index].capital);
-                      print(countries![index].languages);
-                      print(countries![index]);
-                      print(
-                        countries![index].flags!.png!,
-                      );
-                    },
-                    child: Text(
-                      countries![index].name!.official!,
-                      style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                          color: darkmood ? Colors.white : Colors.black),
-                    ),
-                  ),
-                  subtitle: Text(
-                      countries![index].capital!.isEmpty
-                          ? ""
-                          : countries![index].capital![0],
-                      style: TextStyle(
-                          fontSize: 12,
-                          color: darkmood ? Colors.white : Colors.grey)),
-                  leading: Container(
-                      // decoration: BoxDecoration(
-                      //   borderRadius: BorderRadius.circular(1000),
-                      // ),
-                      width: 40,
-                      child: Image.network(
-                        countries![index].flags!.png!,
-                      )),
-                );
-              }),
+              child: ListView.builder(
+                  itemCount: countries!.isEmpty ? 1 : countries!.length,
+                  itemBuilder: (context, index) {
+                    return countries!.isEmpty || countries == null
+                        ? Center(child: CircularProgressIndicator())
+                        : ListTile(
+                            title: InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => countDetails(
+                                          name:
+                                              countries![index].name!.official!,
+                                          population: countries![index]
+                                              .population
+                                              .toString(),
+                                          region: countries![index]
+                                              .region
+                                              .toString(),
+                                          capital: countries![index]
+                                              .capital
+                                              .toString(),
+                                          motto: countries![index]
+                                              .demonyms
+                                              .toString(),
+                                          officaillabuage: countries![index]
+                                              .languages
+                                              .toString(),
+                                          ethicgroup:
+                                              countries![index].subregion,
+                                          relgion: countries![index]
+                                              .region
+                                              .toString(),
+                                          government: countries![index]
+                                              .status
+                                              .toString(),
+                                          independece: countries![index]
+                                              .independent
+                                              .toString(),
+                                          area:
+                                              countries![index].area.toString(),
+                                          currency: countries![index]
+                                              .currencies
+                                              .toString(),
+                                          GDP:
+                                              countries![index].gini.toString(),
+                                          timezone: countries![index]
+                                              .timezones
+                                              .toString(),
+                                          dateformat:
+                                              countries![index].cca2.toString(),
+                                          dailingcode: countries![index].cca3,
+                                          drivingside: countries![index].ccn3,
+                                          data: countries![index].flags!.png!),
+                                    ));
+                                // print(countries![index].name!.official!);
+                                // print(countries![index].population);
+                                // print(countries![index].region);
+                                // print(countries![index].capital);
+                                // print(countries![index].languages);
+                                // print(countries![index]);
+                                // print(
+                                //   countries![index].flags!.png!,
+                                // );
+                              },
+                              child: Text(
+                                countries![index].name!.official!,
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold,
+                                    color:
+                                        darkmood ? Colors.white : Colors.black),
+                              ),
+                            ),
+                            subtitle: Text(
+                                countries![index].capital!.isEmpty
+                                    ? ""
+                                    : countries![index].capital![0],
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    color:
+                                        darkmood ? Colors.white : Colors.grey)),
+                            leading: Container(
+                                // decoration: BoxDecoration(
+                                //   borderRadius: BorderRadius.circular(1000),
+                                // ),
+                                width: 40,
+                                child: Image.network(
+                                  countries![index].flags!.png!,
+                                )),
+                          );
+                  }),
             )
           ],
         ),
@@ -803,3 +869,13 @@ class _Homep_pageState extends State<Homep_page> {
     );
   }
 }
+
+// class MyClip extends CustomClipper<Rect> {
+//   Rect getClip(Size size) {
+//     return Rect.fromLTRB(10, 10, 10, 10);
+//   }
+
+//   bool shouldReclip(oldClipper) {
+//     return false;
+//   }
+// }
