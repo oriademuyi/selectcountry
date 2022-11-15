@@ -28,7 +28,38 @@ class _Homep_pageState extends State<Homep_page> {
   bool checkbocliked6 = false;
   bool checkbocliked7 = false;
   List<Countrylist>? countries = [];
+  List<Countrylist>? defaultItems = [];
   List<String>? languages;
+
+  void filterSearchResults(String query) async {
+    List<Countrylist> dummySearchList = [];
+    dummySearchList.addAll(defaultItems!);
+    print("defaultItem: $defaultItems");
+    if (query.isNotEmpty) {
+      List<Countrylist> dummyListData = [];
+      dummySearchList.forEach((item) {
+        if (item.name!.common!.toLowerCase().contains(query.toLowerCase()) ||
+            item.capital!.contains(query)) {
+          dummyListData.add(item);
+        }
+      });
+      //  print("defaultItem: $defaultItems");
+      setState(() {
+        countries!.clear();
+        countries!.addAll(dummyListData);
+      });
+      print("defaultItem: $defaultItems");
+      return;
+    } else if (query.isEmpty) {
+      // await getCountryData();
+      // print("defaultItem: $defaultItems");
+      setState(() {
+        countries!.clear();
+        countries!.addAll(defaultItems!);
+      });
+      print("defaultItem: $defaultItems");
+    }
+  }
 
   fetchCountry() async {
     final response =
@@ -44,6 +75,7 @@ class _Homep_pageState extends State<Homep_page> {
         countries = county_name;
         countries!
             .sort((a, b) => a.name!.official!.compareTo(b.name!.official!));
+        defaultItems!.addAll(countries!);
         // languages = countries!.forEach((element) {
         //   languages!.add(element.languages!.values.toString());
         // })
@@ -101,6 +133,10 @@ class _Homep_pageState extends State<Homep_page> {
                   Flexible(
                     flex: 2,
                     child: TextFormField(
+                      onChanged: (value) {
+                        print(value);
+                        filterSearchResults(value);
+                      },
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 11.0),
                       decoration: InputDecoration(
@@ -179,7 +215,7 @@ class _Homep_pageState extends State<Homep_page> {
                                           //               );
                                           //             });
                                           //       } else {
-                                          //         print(snapshot.data);
+                                          //         print(snapshot.ata);
                                           //         return Text('Loading data');
                                           //       }
                                           //     })
